@@ -16,4 +16,16 @@
 - build into docker
 - kafka connectivity
 - Sentry-like error tracking
+- proper configuration/flag responsiveness
+- replace nodemon with pm2
 - documentation atop ^
+
+## Finished:
+
+### Typescript Support
+
+See Commit: f7bbccb
+
+## Example:
+
+Give Recognition MS
