@@ -1,14 +1,26 @@
 import * as Koa from "koa";
 import * as Router from "koa-router";
+import { applyGraphQL } from "./graphql";
 
 const app = new Koa();
 const router = new Router();
 
-router.get("/*", async ctx => {
+/**
+ * Router
+ */
+app.use(router.routes());
+
+/**
+ * Default Route
+ */
+router.get("/", async ctx => {
   ctx.body = "Hello World!";
 });
 
-app.use(router.routes());
+/**
+ * GraphQL
+ */
+applyGraphQL(app);
 
 app.listen(3000);
 
