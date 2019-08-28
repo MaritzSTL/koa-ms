@@ -1,6 +1,5 @@
 ## Work to be done:
 
-- graphql endpoint
 - graphql auth directive demonstration
 - openapi atop graphql
 - process jwt's
@@ -27,5 +26,7 @@
 See Commit: f7bbccb
 
 ### Middlewares
+
+GraphQL Endpoint: b39857c
 
 #### Body Parsing
