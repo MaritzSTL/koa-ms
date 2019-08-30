@@ -3,10 +3,10 @@ import * as Koa from "koa";
 import { typeDefs, resolvers } from "../../graphql";
 
 export function init(server: Koa) {
+  let apolloConfig: Config = { typeDefs, resolvers };
+
   const apiKey = process.env.APOLLO_ENGINE_KEY;
   const schemaTag = process.env.APOLLO_SCHEMA_KEY;
-
-  let apolloConfig: Config = { typeDefs, resolvers };
 
   if (apiKey && schemaTag) {
     apolloConfig = {
