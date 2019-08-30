@@ -4,7 +4,6 @@
 - process jwt's
 - postgres
 - instrumentation
-  - newrelic
   - apollo federation
 - tenant scoping
 - testing (unit)
@@ -51,3 +50,5 @@ Basic containerization: a3e7a8f
 ### NewRelic
 
 Make sure to review configured headers
+
+NewRelic instrumentation: 80fd071
