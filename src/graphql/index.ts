@@ -1,5 +1,5 @@
-import { ApolloServer, gql } from "apollo-server-koa";
-import { typeDef, resolvers } from "./recognitions";
+import { gql } from "apollo-server-koa";
+import * as recognitions from "./recognitions";
 
 const baseTypeDefs = gql`
   type Query {
@@ -11,12 +11,5 @@ const baseTypeDefs = gql`
   }
 `;
 
-const typeDefs = [baseTypeDefs, typeDef];
-
-// @ts-ignore
-const applyGraphQL = (app: Koa) => {
-  const server = new ApolloServer({ typeDefs, resolvers });
-  server.applyMiddleware({ app });
-};
-
-export { applyGraphQL };
+export const typeDefs = [baseTypeDefs, recognitions.typeDef];
+export const resolvers = [recognitions.resolvers];

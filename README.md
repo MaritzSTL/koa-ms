@@ -1,12 +1,10 @@
 ## Work to be done:
 
 - graphql auth directive demonstration
-- openapi atop graphql
 - process jwt's
 - postgres
 - instrumentation
   - health check
-  - logging
   - newrelic
   - apollo federation
 - tenant scoping
@@ -16,8 +14,24 @@
 - kafka connectivity
 - Sentry-like error tracking
 - proper configuration/flag responsiveness
-- replace nodemon with pm2
 - documentation atop ^
+- testing
+  - unit
+  - integration testing
+- database
+  - seed data
+  - fixture data
+  - migration management
+  - schema management
+- containerization
+- support for envs
+  - development
+  - prod-like
+  - test
+
+## backburner
+
+- openapi atop graphql
 
 ## Work Demonstrated
 
@@ -29,4 +43,6 @@ See Commit: f7bbccb
 
 GraphQL Endpoint: b39857c
 
-#### Body Parsing
+### Server Updates
+
+Health Check, Logging, Error Handling, Graceful Shutdown: coming shortly

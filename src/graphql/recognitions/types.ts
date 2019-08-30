@@ -5,5 +5,5 @@ export type RecognitionInput = {
 };
 
 export type Parent = {
-  [string]: String;
+  [propName: string]: String;
 };
