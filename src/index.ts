@@ -2,6 +2,7 @@ import pino from "pino";
 import { createContainer } from "./container";
 import { HealthMonitor } from "./lib/health";
 import { AppServer, createServer } from "./server";
+import "@newrelic/koa";
 
 export async function init() {
   const logger = pino();

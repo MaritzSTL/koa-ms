@@ -9,7 +9,6 @@
 - tenant scoping
 - testing (unit)
 - testing (e2e)
-- build into docker
 - kafka connectivity
 - Sentry-like error tracking
 - proper configuration/flag responsiveness
@@ -48,3 +47,7 @@ Health Check, Logging, Error Handling, Graceful Shutdown: e96a3e6y
 ### Dockerization
 
 Basic containerization: a3e7a8f
+
+### NewRelic
+
+Make sure to review configured headers

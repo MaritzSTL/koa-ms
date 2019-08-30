@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@newrelic/koa": "^2.0.0",
     "apollo-server": "^2.9.0",
     "apollo-server-koa": "^2.9.0",
     "async": "^3.1.0",
@@ -11,6 +12,7 @@
     "koa": "^2.8.1",
     "koa-router": "^7.4.0",
     "moment": "^2.24.0",
+    "newrelic": "^5.11.0",
     "pino": "^5.13.2"
   },
   "devDependencies": {
