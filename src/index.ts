@@ -9,7 +9,7 @@ export async function init() {
   try {
     logger.info("Starting HTTP server");
 
-    const port = Number(process.env.PORT) || 3000;
+    const port = Number(process.env.PORT) || 6999;
     const container = createContainer(logger);
     const app = createServer(container);
     const health = container.health;

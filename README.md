@@ -4,7 +4,6 @@
 - process jwt's
 - postgres
 - instrumentation
-  - health check
   - newrelic
   - apollo federation
 - tenant scoping
@@ -23,7 +22,6 @@
   - fixture data
   - migration management
   - schema management
-- containerization
 - support for envs
   - development
   - prod-like
@@ -46,3 +44,5 @@ GraphQL Endpoint: b39857c
 ### Server Updates
 
 Health Check, Logging, Error Handling, Graceful Shutdown: e96a3e6y
+
+### Dockerization
