@@ -46,3 +46,5 @@ GraphQL Endpoint: b39857c
 Health Check, Logging, Error Handling, Graceful Shutdown: e96a3e6y
 
 ### Dockerization
+
+Basic containerization: a3e7a8f
