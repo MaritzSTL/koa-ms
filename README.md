@@ -20,6 +20,7 @@ npm i -g prisma graphql-cli
 - testing
   - acceptance testing (w/o prisma)
   - integration testing (w/ prisma)
+  - coverage configuration
 - support for envs
   - development
   - prod-like
@@ -35,3 +36,4 @@ npm i -g prisma graphql-cli
 - Apollo Engine: 0e8d352
 - Prisma support: 37b18ba
 - Prisma client generation, seeding: 2facf46
+- Jest unit test: 80ba8f7
