@@ -1,7 +1,25 @@
+# Specifies the HTTP endpoint of your Prisma API.
 endpoint: ${env:PRISMA_ENDPOINT}
+
+# Defines your models, each model is mapped to the database as a collection.
 datamodel:
   - src/prisma/datamodel.prisma
+
+# Indicates that this Prisma server is based on MongoDB.
 databaseType: document
+
+# Specifies the language and directory for the generated Prisma client.
+generate:
+  - generator: typescript-client
+    output: ./src/prisma/generated/prisma-client/
+
+# Ensures Prisma client is re-generated after a datamodel change.
+# Captures snapshot of generated GraphQL - see .graphqlconfig.yml for more configuration
 hooks:
   post-deploy:
+    - prisma generate
     - graphql get-schema -p prisma
+
+# Seeds initial data into the database by running a script.
+seed:
+  run: yarn ts-node ./src/prisma/seed.ts

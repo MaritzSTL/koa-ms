@@ -1,0 +1,849 @@
+# source: http://localhost:4466
+# timestamp: Wed Oct 02 2019 14:44:35 GMT-0500 (Central Daylight Time)
+
+type AggregateLineItem {
+  count: Int!
+}
+
+type AggregateRecognition {
+  count: Int!
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+scalar DateTime
+
+type LineItem implements Node {
+  id: ID!
+  from: String!
+  to: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+  amount: Int!
+}
+
+"""A connection to a list of items."""
+type LineItemConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [LineItemEdge]!
+  aggregate: AggregateLineItem!
+}
+
+input LineItemCreateInput {
+  id: ID
+  from: String!
+  to: String!
+  amount: Int!
+}
+
+input LineItemCreateManyInput {
+  create: [LineItemCreateInput!]
+  connect: [LineItemWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type LineItemEdge {
+  """The item at the end of the edge."""
+  node: LineItem!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum LineItemOrderByInput {
+  id_ASC
+  id_DESC
+  from_ASC
+  from_DESC
+  to_ASC
+  to_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  amount_ASC
+  amount_DESC
+}
+
+type LineItemPreviousValues {
+  id: ID!
+  from: String!
+  to: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+  amount: Int!
+}
+
+input LineItemScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LineItemScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LineItemScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LineItemScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  from: String
+
+  """All values that are not equal to given value."""
+  from_not: String
+
+  """All values that are contained in given list."""
+  from_in: [String!]
+
+  """All values that are not contained in given list."""
+  from_not_in: [String!]
+
+  """All values less than the given value."""
+  from_lt: String
+
+  """All values less than or equal the given value."""
+  from_lte: String
+
+  """All values greater than the given value."""
+  from_gt: String
+
+  """All values greater than or equal the given value."""
+  from_gte: String
+
+  """All values containing the given string."""
+  from_contains: String
+
+  """All values not containing the given string."""
+  from_not_contains: String
+
+  """All values starting with the given string."""
+  from_starts_with: String
+
+  """All values not starting with the given string."""
+  from_not_starts_with: String
+
+  """All values ending with the given string."""
+  from_ends_with: String
+
+  """All values not ending with the given string."""
+  from_not_ends_with: String
+  to: String
+
+  """All values that are not equal to given value."""
+  to_not: String
+
+  """All values that are contained in given list."""
+  to_in: [String!]
+
+  """All values that are not contained in given list."""
+  to_not_in: [String!]
+
+  """All values less than the given value."""
+  to_lt: String
+
+  """All values less than or equal the given value."""
+  to_lte: String
+
+  """All values greater than the given value."""
+  to_gt: String
+
+  """All values greater than or equal the given value."""
+  to_gte: String
+
+  """All values containing the given string."""
+  to_contains: String
+
+  """All values not containing the given string."""
+  to_not_contains: String
+
+  """All values starting with the given string."""
+  to_starts_with: String
+
+  """All values not starting with the given string."""
+  to_not_starts_with: String
+
+  """All values ending with the given string."""
+  to_ends_with: String
+
+  """All values not ending with the given string."""
+  to_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  amount: Int
+
+  """All values that are not equal to given value."""
+  amount_not: Int
+
+  """All values that are contained in given list."""
+  amount_in: [Int!]
+
+  """All values that are not contained in given list."""
+  amount_not_in: [Int!]
+
+  """All values less than the given value."""
+  amount_lt: Int
+
+  """All values less than or equal the given value."""
+  amount_lte: Int
+
+  """All values greater than the given value."""
+  amount_gt: Int
+
+  """All values greater than or equal the given value."""
+  amount_gte: Int
+}
+
+type LineItemSubscriptionPayload {
+  mutation: MutationType!
+  node: LineItem
+  updatedFields: [String!]
+  previousValues: LineItemPreviousValues
+}
+
+input LineItemSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LineItemSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: LineItemWhereInput
+}
+
+input LineItemUpdateDataInput {
+  from: String
+  to: String
+  amount: Int
+}
+
+input LineItemUpdateInput {
+  from: String
+  to: String
+  amount: Int
+}
+
+input LineItemUpdateManyDataInput {
+  from: String
+  to: String
+  amount: Int
+}
+
+input LineItemUpdateManyInput {
+  create: [LineItemCreateInput!]
+  connect: [LineItemWhereUniqueInput!]
+  set: [LineItemWhereUniqueInput!]
+  disconnect: [LineItemWhereUniqueInput!]
+  delete: [LineItemWhereUniqueInput!]
+  update: [LineItemUpdateWithWhereUniqueNestedInput!]
+  updateMany: [LineItemUpdateManyWithWhereNestedInput!]
+  deleteMany: [LineItemScalarWhereInput!]
+  upsert: [LineItemUpsertWithWhereUniqueNestedInput!]
+}
+
+input LineItemUpdateManyMutationInput {
+  from: String
+  to: String
+  amount: Int
+}
+
+input LineItemUpdateManyWithWhereNestedInput {
+  where: LineItemScalarWhereInput!
+  data: LineItemUpdateManyDataInput!
+}
+
+input LineItemUpdateWithWhereUniqueNestedInput {
+  where: LineItemWhereUniqueInput!
+  data: LineItemUpdateDataInput!
+}
+
+input LineItemUpsertWithWhereUniqueNestedInput {
+  where: LineItemWhereUniqueInput!
+  update: LineItemUpdateDataInput!
+  create: LineItemCreateInput!
+}
+
+input LineItemWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LineItemWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  from: String
+
+  """All values that are not equal to given value."""
+  from_not: String
+
+  """All values that are contained in given list."""
+  from_in: [String!]
+
+  """All values that are not contained in given list."""
+  from_not_in: [String!]
+
+  """All values less than the given value."""
+  from_lt: String
+
+  """All values less than or equal the given value."""
+  from_lte: String
+
+  """All values greater than the given value."""
+  from_gt: String
+
+  """All values greater than or equal the given value."""
+  from_gte: String
+
+  """All values containing the given string."""
+  from_contains: String
+
+  """All values not containing the given string."""
+  from_not_contains: String
+
+  """All values starting with the given string."""
+  from_starts_with: String
+
+  """All values not starting with the given string."""
+  from_not_starts_with: String
+
+  """All values ending with the given string."""
+  from_ends_with: String
+
+  """All values not ending with the given string."""
+  from_not_ends_with: String
+  to: String
+
+  """All values that are not equal to given value."""
+  to_not: String
+
+  """All values that are contained in given list."""
+  to_in: [String!]
+
+  """All values that are not contained in given list."""
+  to_not_in: [String!]
+
+  """All values less than the given value."""
+  to_lt: String
+
+  """All values less than or equal the given value."""
+  to_lte: String
+
+  """All values greater than the given value."""
+  to_gt: String
+
+  """All values greater than or equal the given value."""
+  to_gte: String
+
+  """All values containing the given string."""
+  to_contains: String
+
+  """All values not containing the given string."""
+  to_not_contains: String
+
+  """All values starting with the given string."""
+  to_starts_with: String
+
+  """All values not starting with the given string."""
+  to_not_starts_with: String
+
+  """All values ending with the given string."""
+  to_ends_with: String
+
+  """All values not ending with the given string."""
+  to_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  amount: Int
+
+  """All values that are not equal to given value."""
+  amount_not: Int
+
+  """All values that are contained in given list."""
+  amount_in: [Int!]
+
+  """All values that are not contained in given list."""
+  amount_not_in: [Int!]
+
+  """All values less than the given value."""
+  amount_lt: Int
+
+  """All values less than or equal the given value."""
+  amount_lte: Int
+
+  """All values greater than the given value."""
+  amount_gt: Int
+
+  """All values greater than or equal the given value."""
+  amount_gte: Int
+}
+
+input LineItemWhereUniqueInput {
+  id: ID
+}
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createRecognition(data: RecognitionCreateInput!): Recognition!
+  createLineItem(data: LineItemCreateInput!): LineItem!
+  updateRecognition(data: RecognitionUpdateInput!, where: RecognitionWhereUniqueInput!): Recognition
+  updateLineItem(data: LineItemUpdateInput!, where: LineItemWhereUniqueInput!): LineItem
+  deleteRecognition(where: RecognitionWhereUniqueInput!): Recognition
+  deleteLineItem(where: LineItemWhereUniqueInput!): LineItem
+  upsertRecognition(where: RecognitionWhereUniqueInput!, create: RecognitionCreateInput!, update: RecognitionUpdateInput!): Recognition!
+  upsertLineItem(where: LineItemWhereUniqueInput!, create: LineItemCreateInput!, update: LineItemUpdateInput!): LineItem!
+  updateManyRecognitions(data: RecognitionUpdateManyMutationInput!, where: RecognitionWhereInput): BatchPayload!
+  updateManyLineItems(data: LineItemUpdateManyMutationInput!, where: LineItemWhereInput): BatchPayload!
+  deleteManyRecognitions(where: RecognitionWhereInput): BatchPayload!
+  deleteManyLineItems(where: LineItemWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  recognitions(where: RecognitionWhereInput, orderBy: RecognitionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Recognition]!
+  lineItems(where: LineItemWhereInput, orderBy: LineItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LineItem]!
+  recognition(where: RecognitionWhereUniqueInput!): Recognition
+  lineItem(where: LineItemWhereUniqueInput!): LineItem
+  recognitionsConnection(where: RecognitionWhereInput, orderBy: RecognitionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecognitionConnection!
+  lineItemsConnection(where: LineItemWhereInput, orderBy: LineItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LineItemConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Recognition implements Node {
+  id: ID!
+  createdAt: DateTime
+  updatedAt: DateTime
+  note: String!
+  lineItems(where: LineItemWhereInput, orderBy: LineItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LineItem!]
+}
+
+"""A connection to a list of items."""
+type RecognitionConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [RecognitionEdge]!
+  aggregate: AggregateRecognition!
+}
+
+input RecognitionCreateInput {
+  id: ID
+  note: String!
+  lineItems: LineItemCreateManyInput
+}
+
+"""An edge in a connection."""
+type RecognitionEdge {
+  """The item at the end of the edge."""
+  node: Recognition!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum RecognitionOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  note_ASC
+  note_DESC
+}
+
+type RecognitionPreviousValues {
+  id: ID!
+  createdAt: DateTime
+  updatedAt: DateTime
+  note: String!
+}
+
+type RecognitionSubscriptionPayload {
+  mutation: MutationType!
+  node: Recognition
+  updatedFields: [String!]
+  previousValues: RecognitionPreviousValues
+}
+
+input RecognitionSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [RecognitionSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: RecognitionWhereInput
+}
+
+input RecognitionUpdateInput {
+  note: String
+  lineItems: LineItemUpdateManyInput
+}
+
+input RecognitionUpdateManyMutationInput {
+  note: String
+}
+
+input RecognitionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [RecognitionWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  note: String
+
+  """All values that are not equal to given value."""
+  note_not: String
+
+  """All values that are contained in given list."""
+  note_in: [String!]
+
+  """All values that are not contained in given list."""
+  note_not_in: [String!]
+
+  """All values less than the given value."""
+  note_lt: String
+
+  """All values less than or equal the given value."""
+  note_lte: String
+
+  """All values greater than the given value."""
+  note_gt: String
+
+  """All values greater than or equal the given value."""
+  note_gte: String
+
+  """All values containing the given string."""
+  note_contains: String
+
+  """All values not containing the given string."""
+  note_not_contains: String
+
+  """All values starting with the given string."""
+  note_starts_with: String
+
+  """All values not starting with the given string."""
+  note_not_starts_with: String
+
+  """All values ending with the given string."""
+  note_ends_with: String
+
+  """All values not ending with the given string."""
+  note_not_ends_with: String
+  lineItems_some: LineItemWhereInput
+}
+
+input RecognitionWhereUniqueInput {
+  id: ID
+}
+
+type Subscription {
+  recognition(where: RecognitionSubscriptionWhereInput): RecognitionSubscriptionPayload
+  lineItem(where: LineItemSubscriptionWhereInput): LineItemSubscriptionPayload
+}

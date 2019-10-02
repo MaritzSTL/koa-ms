@@ -1,3 +1,9 @@
+## Global Installs
+
+```
+npm i -g prisma graphql-cli
+```
+
 ## Work to be done:
 
 - graphql auth directive demonstration
@@ -31,3 +37,7 @@
 - NewRelic (Make sure to review configured headers): 80fd071
 - Apollo Engine: 0e8d352
 - Prisma support: 37b18ba
+
+```
+
+```
