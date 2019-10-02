@@ -6,25 +6,14 @@ npm i -g prisma graphql-cli
 
 ## Work to be done:
 
-- tenant scoping
-- process jwt's
-- graphql auth directive demonstration
-- instrumentation
-  - apollo federation
-- testing (unit)
-- testing (e2e)
-- kafka connectivity
-- Sentry-like error tracking
-- proper configuration/flag responsiveness
-- documentation atop ^
-- testing
-  - acceptance testing (w/o prisma)
-  - integration testing (w/ prisma)
-  - coverage configuration
-- support for envs
-  - development
-  - prod-like
-  - test
+Now being tracked on Github here: https://github.com/MaritzSTL/koa-ms/milestone/1
+
+- Apollo federation support?
+
+## Domain Modeling Questions
+
+- User?
+- Tenant?
 
 ## Work Demonstrated
 
