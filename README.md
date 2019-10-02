@@ -6,11 +6,11 @@ npm i -g prisma graphql-cli
 
 ## Work to be done:
 
-- graphql auth directive demonstration
+- tenant scoping
 - process jwt's
+- graphql auth directive demonstration
 - instrumentation
   - apollo federation
-- tenant scoping
 - testing (unit)
 - testing (e2e)
 - kafka connectivity
@@ -18,8 +18,8 @@ npm i -g prisma graphql-cli
 - proper configuration/flag responsiveness
 - documentation atop ^
 - testing
-  - unit
-  - integration testing
+  - acceptance testing (w/o prisma)
+  - integration testing (w/ prisma)
 - support for envs
   - development
   - prod-like
