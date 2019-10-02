@@ -20,9 +20,6 @@ npm i -g prisma graphql-cli
 - testing
   - unit
   - integration testing
-- database
-  - seed data
-  - fixture data
 - support for envs
   - development
   - prod-like
@@ -37,7 +34,4 @@ npm i -g prisma graphql-cli
 - NewRelic (Make sure to review configured headers): 80fd071
 - Apollo Engine: 0e8d352
 - Prisma support: 37b18ba
-
-```
-
-```
+- Prisma client generation, seeding: 2facf46
