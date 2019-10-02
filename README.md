@@ -2,7 +2,7 @@
 
 - graphql auth directive demonstration
 - process jwt's
-- postgres
+- mongodb
 - instrumentation
   - apollo federation
 - tenant scoping

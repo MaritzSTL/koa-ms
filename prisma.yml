@@ -1,0 +1,7 @@
+endpoint: ${env:PRISMA_ENDPOINT}
+datamodel:
+  - src/prisma/datamodel.prisma
+databaseType: document
+hooks:
+  post-deploy:
+    - graphql get-schema -p prisma
