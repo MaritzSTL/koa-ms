@@ -17,6 +17,7 @@ export function init(server: Koa) {
       }
     };
   }
+
   const gqlServer = new ApolloServer(apolloConfig);
 
   server.use(gqlServer.getMiddleware());
