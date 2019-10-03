@@ -7,8 +7,22 @@ import * as health from "./health";
 import * as middlewares from "./middlewares";
 import * as graphql from "./graphql";
 
+//TODO(zemptime): I don't totally understand the following types. Let's vet/review this.
+
+/**
+ * Extend this if you need to
+ */
+export interface ICustomAppState {}
+
+/**
+ * Extend this if your middleware is providing any extra properties inside `context`.
+ */
+export interface ICustomAppContext {
+  tenantId?: string;
+}
+
 export class AppServer {
-  private app: Koa;
+  private app: Koa<ICustomAppState, ICustomAppContext>;
   private server: Server;
 
   constructor(app: Koa) {
@@ -70,8 +84,9 @@ export function createServer(container: ServiceContainer): AppServer {
    */
 
   app.use(middlewares.responseTime);
-  app.use(middlewares.logRequest(container.logger));
   app.use(middlewares.errorHandler(container.logger));
+  app.use(middlewares.logRequest(container.logger));
+  app.use(middlewares.tenantHandler);
 
   /**
    * Routes
