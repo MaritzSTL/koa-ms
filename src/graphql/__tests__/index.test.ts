@@ -1,5 +1,5 @@
-import { typeDefs } from "../index";
 import { makeExecutableSchema, mockServer } from "graphql-tools";
+import { typeDefs } from "../index";
 
 describe("TypeDefs", () => {
   it("should contain valid type definitions", async () => {
