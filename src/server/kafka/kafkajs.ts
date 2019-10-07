@@ -1,7 +1,7 @@
 const { Kafka } = require('kafkajs');
 
 const kafka = new Kafka({
-    clientId: 'my-app',
+    clientId: 'recognition-service',
     brokers: ['localhost:9092']
 });
 
