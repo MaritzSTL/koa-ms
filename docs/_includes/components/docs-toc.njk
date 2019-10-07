@@ -1,0 +1,10 @@
+<div class="koa-toc">
+  <details open>
+    	<summary class="">Menu</summary>
+      <ul>
+      {%- for page in collections.page -%}
+        <li><a href="{{ page.url }}">{{ page.data.title }}</a></li>
+      {%- endfor -%}
+      </ul>
+  </details>
+</div>
