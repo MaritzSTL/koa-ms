@@ -17,6 +17,7 @@
     "pino": "^5.13.2"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^0.9.0",
     "@types/async": "^3.0.1",
     "@types/jest": "^24.0.18",
     "@types/koa": "^2.0.49",
@@ -29,6 +30,7 @@
     "ts-jest": "^24.1.0",
     "ts-node": "^8.3.0",
     "tsc-watch": "^2.4.0",
+    "typedoc": "^0.15.0",
     "typescript": "^3.5.3"
   },
   "scripts": {
@@ -42,6 +44,10 @@
     "test:integration": "echo 'TODO'",
     "deploy:dev": "prisma deploy --env-file development.env",
     "generate:dev": "prisma generate --env-file development.env",
-    "seed:dev": "prisma seed --env-file development.env"
+    "seed:dev": "prisma seed --env-file development.env",
+    "docs:serve": "yarn run docs:generate:typedoc && npx @11ty/eleventy --serve",
+    "docs:generate": "yarn run docs:generate:typedoc && yarn run docs:generate:eleventy",
+    "docs:generate:eleventy": "npx @11ty/eleventy",
+    "docs:generate:typedoc": "typedoc --readme docs/_api/api-readme.md --tsconfig tsconfig_apidoc.json --mode modules --excludeNotExported --excludePrivate --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out ./docs/_site/_api src/**/*.ts"
   }
 }
