@@ -5,7 +5,7 @@ export function runKafka() {
     const kafka = new Kafka({
         clientId: 'recognition-service',
         brokers: ['localhost:9092']
-    });
+});
 
     const producer = kafka.producer();
     const consumer = kafka.consumer({groupId: 'recognition-group'});
@@ -36,4 +36,5 @@ export function runKafka() {
     };
 
     run().catch(console.error);
+    return kafka;
 }

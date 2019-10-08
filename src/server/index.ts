@@ -96,6 +96,7 @@ export function createServer(container: ServiceContainer): AppServer {
   app.use(middlewares.logRequest(container.logger));
   app.use(middlewares.tenantHandler);
   app.use(middlewares.jwtDecoder(container.logger));
+  app.use(middlewares.runKafka);
 
   /**
    * Routes

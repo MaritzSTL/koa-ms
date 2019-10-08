@@ -4,7 +4,6 @@ import { HealthMonitor } from "./lib/health";
 import { AppServer, createServer } from "./server";
 import "@newrelic/koa";
 import {runKafka} from "./server/kafka/kafkajs";
-import {Kafka} from "kafkajs";
 
 export async function init() {
   const logger = pino();
@@ -20,7 +19,7 @@ export async function init() {
 
     app.listen(port);
 
-    registerProcessEvents(logger, app, health, kafka);
+    registerProcessEvents(logger, app, health);
 
     logger.info(`Application running on port: ${port}`);
   } catch (e) {
@@ -31,9 +30,7 @@ export async function init() {
 function registerProcessEvents(
   logger: pino.Logger,
   app: AppServer,
-  health: HealthMonitor,
-  kafka: Kafka
-) {
+  health: HealthMonitor) {
   process.on("uncaughtException", (error: Error) => {
     logger.error("UncaughtException", error);
   });
