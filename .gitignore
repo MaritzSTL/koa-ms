@@ -2,3 +2,6 @@ node_modules
 dist
 *.env
 .idea
+.env.*
+_site
+docs/typedoc

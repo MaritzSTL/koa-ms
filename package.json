@@ -5,20 +5,26 @@
   "license": "MIT",
   "test": "jest",
   "dependencies": {
+    "@maritz/mtztools-ms-helpers": "^5.3.10",
     "@newrelic/koa": "^2.0.0",
     "apollo-server": "^2.9.0",
     "apollo-server-koa": "^2.9.0",
     "async": "^3.1.0",
+    "cloud-config-client": "^1.4.2",
     "graphql": "^14.5.4",
     "kafkajs": "^1.11.0",
     "koa": "^2.8.1",
     "koa-router": "^7.4.0",
+    "launchdarkly-node-server-sdk": "^5.9.0",
     "moment": "^2.24.0",
     "newrelic": "^5.11.0",
     "pino": "^5.13.2"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^0.9.0",
     "@types/async": "^3.0.1",
+    "@types/cloud-config-client": "^1.4.0",
+    "@types/dotenv": "^6.1.1",
     "@types/jest": "^24.0.18",
     "@types/koa": "^2.0.49",
     "@types/koa-router": "^7.0.42",
@@ -30,6 +36,7 @@
     "ts-jest": "^24.1.0",
     "ts-node": "^8.3.0",
     "tsc-watch": "^2.4.0",
+    "typedoc": "^0.15.0",
     "typescript": "^3.5.3"
   },
   "scripts": {
@@ -37,12 +44,19 @@
     "build:watch": "rm -rf dist && tsc -w",
     "clean": "rm -rf node_modules coverage dist",
     "start": "node dist/index.js",
-    "start:dev": "tsc-watch --onSuccess 'node --inspect=0.0.0.0:5858 dist/index.js'",
+    "start:local": "tsc-watch --onSuccess 'node --inspect=0.0.0.0:5858 dist/index.js'",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:integration": "echo 'TODO'",
-    "deploy:dev": "prisma deploy --env-file development.env",
-    "generate:dev": "prisma generate --env-file development.env",
-    "seed:dev": "prisma seed --env-file development.env"
+    "deploy:local": "prisma deploy --env-file .env.local",
+    "generate:local": "prisma generate --env-file .env.local",
+    "seed:local": "prisma seed --env-file .env.local",
+    "deploy:dev": "prisma deploy --env-file .env.development",
+    "generate:dev": "prisma generate --env-file .env.development",
+    "seed:dev": "prisma seed --env-file .env.development.env",
+    "docs:serve": "yarn run docs:generate:typedoc && npx @11ty/eleventy --serve",
+    "docs:generate": "yarn run docs:generate:typedoc && yarn run docs:generate:eleventy",
+    "docs:generate:eleventy": "npx @11ty/eleventy",
+    "docs:generate:typedoc": "typedoc --readme docs/_api/api-readme.md --tsconfig tsconfig_apidoc.json --mode modules --excludeNotExported --excludePrivate --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out ./docs/_site/_api src/**/*.ts"
   }
 }

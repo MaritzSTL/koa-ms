@@ -11,7 +11,7 @@ export async function init() {
     logger.info("Starting HTTP server");
 
     const port = Number(process.env.PORT) || 6999;
-    const container = createContainer(logger);
+    const container = await createContainer(logger);
     const app = createServer(container);
     const health = container.health;
 

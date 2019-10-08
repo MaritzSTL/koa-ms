@@ -80,7 +80,15 @@ export function createServer(container: ServiceContainer): AppServer {
   const appServer = new AppServer(app);
 
   /**
-   * Middlewares
+   * Context Extensions
+   *  - Add useful properties/methods to ctx to be used across entire app
+   *  - Store things here which don't change for the lifetime of the application
+   */
+
+  app.context.config = container.config;
+
+  /**
+   * Middlewares - put logic here that corresponds with per-request requirements
    */
 
   app.use(middlewares.responseTime);
