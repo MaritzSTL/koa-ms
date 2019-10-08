@@ -2,6 +2,8 @@ import { Logger } from "pino";
 import { HealthMonitor } from "./lib/health";
 import { LDClient } from "launchdarkly-node-server-sdk";
 import { establishConfig, Config } from "./lib/config";
+import {runKafka} from "./server/kafka/kafkajs";
+import {Kafka} from "kafkajs";
 // import { ldClient } from "./lib/launchdarkly";
 
 export interface ServiceContainer {
@@ -9,6 +11,7 @@ export interface ServiceContainer {
   health: HealthMonitor;
   logger: Logger;
   ldClient?: LDClient;
+  kafka?: Kafka;
 }
 
 export async function createContainer(
@@ -16,6 +19,7 @@ export async function createContainer(
 ): Promise<ServiceContainer> {
   const config = await establishConfig(logger);
   const healthMonitor = new HealthMonitor();
+  const kafka = runKafka();
 
   // TODO:
   //    - ldclient
@@ -27,7 +31,8 @@ export async function createContainer(
   return {
     config,
     health: healthMonitor,
-    logger
+    logger,
+    kafka
     // ldClient
   };
 }
