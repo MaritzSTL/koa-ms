@@ -3,6 +3,7 @@ import { createContainer } from "./container";
 import { HealthMonitor } from "./lib/health";
 import { AppServer, createServer } from "./server";
 import "@newrelic/koa";
+import dotenv from "dotenv";
 
 export async function init() {
   const logger = pino();
@@ -60,4 +61,6 @@ function registerProcessEvents(
   });
 }
 
+// Pulls in configuration from .env
+dotenv.config();
 init();

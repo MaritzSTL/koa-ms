@@ -86,6 +86,7 @@ export function createServer(container: ServiceContainer): AppServer {
    */
 
   app.context.config = container.config;
+  app.context.config = container.ldClient;
 
   /**
    * Middlewares - put logic here that corresponds with per-request requirements
