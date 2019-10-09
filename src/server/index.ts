@@ -2,7 +2,7 @@ import { ErrorCallback, retry } from "async";
 import Koa from "koa";
 import { Server } from "http";
 import { AppError } from "../errors";
-import { ServiceContainer } from "../container";
+import { ServiceProvider } from "../provider";
 import * as health from "./health";
 import * as middlewares from "./middlewares";
 import * as graphql from "./graphql";
@@ -75,7 +75,7 @@ export class AppServer {
   }
 }
 
-export function createServer(container: ServiceContainer): AppServer {
+export function createServer(Provider: ServiceProvider): AppServer {
   const app = new Koa();
   const appServer = new AppServer(app);
 
@@ -85,24 +85,26 @@ export function createServer(container: ServiceContainer): AppServer {
    *  - Store things here which don't change for the lifetime of the application
    */
 
-  app.context.config = container.config;
-
+  app.context.config = Provider.config;
+  app.context.ldClient = Provider.ldClient;
+  app.context.kafka = Provider.kafka;
+  app.context.kafkaTopics = Provider.kafkaTopics;
   /**
    * Middlewares - put logic here that corresponds with per-request requirements
    */
 
   app.use(middlewares.responseTime);
-  app.use(middlewares.errorHandler(container.logger));
-  app.use(middlewares.logRequest(container.logger));
+  app.use(middlewares.errorHandler(Provider.logger));
+  app.use(middlewares.logRequest(Provider.logger));
   app.use(middlewares.tenantHandler);
-  app.use(middlewares.jwtDecoder(container.logger));
+  app.use(middlewares.jwtDecoder(Provider.logger));
   app.use(middlewares.runKafka);
 
   /**
    * Routes
    */
 
-  health.init(app, container);
+  health.init(app, Provider);
   graphql.init(app);
 
   /**

@@ -1,7 +1,11 @@
 node_modules
 dist
+<<<<<<< HEAD
 *.env
 .idea
 .env.*
+=======
+.env
+>>>>>>> origin
 _site
 docs/typedoc

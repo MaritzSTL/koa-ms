@@ -2,11 +2,11 @@ import { ApolloServer, Config } from "apollo-server-koa";
 import * as Koa from "koa";
 import { typeDefs, resolvers } from "../../graphql";
 
-export function init(server: Koa) {
+export function init(app: Koa) {
   let apolloConfig: Config = { typeDefs, resolvers };
 
-  const apiKey = process.env.APOLLO_ENGINE_KEY;
-  const schemaTag = process.env.APOLLO_SCHEMA_KEY;
+  const apiKey = app.context.config.APOLLO_SCHEMA_KEY;
+  const schemaTag = app.context.config.APOLLO_SCHEMA_KEY;
 
   if (apiKey && schemaTag) {
     apolloConfig = {
@@ -20,5 +20,5 @@ export function init(server: Koa) {
 
   const gqlServer = new ApolloServer(apolloConfig);
 
-  server.use(gqlServer.getMiddleware());
+  app.use(gqlServer.getMiddleware());
 }

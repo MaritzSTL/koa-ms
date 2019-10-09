@@ -1,9 +1,9 @@
 import pino from "pino";
-import { createContainer } from "./container";
+import { createProvider } from "./provider";
 import { HealthMonitor } from "./lib/health";
 import { AppServer, createServer } from "./server";
 import "@newrelic/koa";
-import {runKafka} from "./server/kafka/kafkajs";
+import dotenv from "dotenv";
 
 export async function init() {
   const logger = pino();
@@ -11,12 +11,12 @@ export async function init() {
   try {
     logger.info("Starting HTTP server");
 
-    const port = Number(process.env.PORT) || 6999;
-    const container = await createContainer(logger);
-    const app = createServer(container);
-    const health = container.health;
+    const Provider = await createProvider(logger);
+    const app = createServer(Provider);
+    const health = Provider.health;
     const kafka = runKafka();
 
+    const port = Provider.config.PORT || 6999;
     app.listen(port);
 
     registerProcessEvents(logger, app, health);
@@ -30,7 +30,8 @@ export async function init() {
 function registerProcessEvents(
   logger: pino.Logger,
   app: AppServer,
-  health: HealthMonitor) {
+  health: HealthMonitor
+) {
   process.on("uncaughtException", (error: Error) => {
     logger.error("UncaughtException", error);
   });
@@ -61,4 +62,6 @@ function registerProcessEvents(
   });
 }
 
+// Pulls in configuration from .env
+dotenv.config();
 init();
