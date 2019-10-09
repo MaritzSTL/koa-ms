@@ -11,11 +11,11 @@ export async function init() {
   try {
     logger.info("Starting HTTP server");
 
-    const port = Number(process.env.PORT) || 6999;
     const container = await createContainer(logger);
     const app = createServer(container);
     const health = container.health;
 
+    const port = container.config.PORT || 6999;
     app.listen(port);
 
     registerProcessEvents(logger, app, health);
