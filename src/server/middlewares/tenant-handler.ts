@@ -12,5 +12,7 @@ export async function tenantHandler(ctx: Context, next: () => Promise<any>) {
     throw new UnauthorizedTenantError();
   }
 
+  ctx.tenantId = tenantId;
+
   await next();
 }
