@@ -2,6 +2,8 @@ import pino from "pino";
 import { createProvider } from "./provider";
 import { HealthMonitor } from "./lib/health";
 import { AppServer, createServer } from "./server";
+import { listen } from "./kafka/index";
+
 import "@newrelic/koa";
 import dotenv from "dotenv";
 
@@ -14,11 +16,11 @@ export async function init() {
     const Provider = await createProvider(logger);
     const app = createServer(Provider);
     const health = Provider.health;
-    const kafka = runKafka();
 
     const port = Provider.config.PORT || 6999;
-    app.listen(port);
+    const kafka = listen();
 
+    app.listen(port);
     registerProcessEvents(logger, app, health);
 
     logger.info(`Application running on port: ${port}`);
@@ -31,7 +33,8 @@ function registerProcessEvents(
   logger: pino.Logger,
   app: AppServer,
   health: HealthMonitor
-) {
+  //kafka: Kafka
+  ) {
   process.on("uncaughtException", (error: Error) => {
     logger.error("UncaughtException", error);
   });

@@ -44,6 +44,7 @@
     "build": "rm -rf dist && tsc",
     "build:watch": "rm -rf dist && tsc -w",
     "clean": "rm -rf node_modules coverage dist",
+    "debug": "node --inspect dist/index.js",
     "start": "node dist/index.js",
     "start:watch": "tsc-watch --onSuccess 'node --inspect=0.0.0.0:5858 dist/index.js'",
     "test": "jest",

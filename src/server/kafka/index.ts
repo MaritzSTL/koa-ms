@@ -9,7 +9,11 @@ const initKafka = ({ KAFKA_CLIENT_ID, KAFKA_BROKERS }: AppConfig): Kafka => {
       clientId: KAFKA_CLIENT_ID,
       brokers: KAFKA_BROKERS
     });
+    console.log("NDH: Kafka called from provider config 1")
+
   }
+  console.log("NDH: Kafka called from provider config 2")
+
   return kafka;
 };
 

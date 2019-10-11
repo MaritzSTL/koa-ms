@@ -88,7 +88,8 @@ export function createServer(Provider: ServiceProvider): AppServer {
   app.context.config = Provider.config;
   app.context.ldClient = Provider.ldClient;
   app.context.kafka = Provider.kafka;
-  app.context.kafkaTopics = Provider.kafkaTopics;
+
+  //app.context.kafkaTopics = Provider.kafkaTopics;
   /**
    * Middlewares - put logic here that corresponds with per-request requirements
    */
@@ -98,7 +99,7 @@ export function createServer(Provider: ServiceProvider): AppServer {
   app.use(middlewares.logRequest(Provider.logger));
   app.use(middlewares.tenantHandler);
   app.use(middlewares.jwtDecoder(Provider.logger));
-  app.use(middlewares.runKafka);
+  // app.use(middlewares.initKafka);
 
   /**
    * Routes
