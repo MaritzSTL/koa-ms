@@ -16,6 +16,7 @@ export interface ICustomAppState {}
 
 /**
  * Extend this if your middleware is providing any extra properties inside `context`.
+ * These must be optional, as we assign most of them after startup.
  */
 export interface ICustomAppContext {
   tenantId?: string;
@@ -86,6 +87,8 @@ export function createServer(container: ServiceContainer): AppServer {
    */
 
   app.context.config = container.config;
+  app.context.ldClient = container.ldClient;
+  app.context.db = container.db;
 
   /**
    * Middlewares - put logic here that corresponds with per-request requirements
@@ -107,7 +110,6 @@ export function createServer(container: ServiceContainer): AppServer {
   /**
    * Router
    */
-  // app.use(router.routes());
 
   /**
    * Default Route
@@ -115,11 +117,6 @@ export function createServer(container: ServiceContainer): AppServer {
   // router.get("/", async ctx => {
   //   ctx.body = "Hello World!";
   // });
-
-  /**
-   * GraphQL
-   */
-  // applyGraphQL(app)
 
   return appServer;
 }

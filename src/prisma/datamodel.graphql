@@ -1,0 +1,25 @@
+# See https://www.prisma.io/docs/datamodel-and-migrations/datamodel-MONGO-knun/ for more details
+
+type User {
+  id: ID! @id
+  tenantId: String!
+  name: String! @unique
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  todos: [Todo]!
+}
+
+type Todo {
+  id: ID! @id
+  tenantId: String!
+  status: TodoStatus!
+  note: String!
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  author: User! @relation(link: INLINE)
+}
+
+enum TodoStatus {
+  Open
+  Resolved
+}

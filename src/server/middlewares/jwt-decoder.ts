@@ -13,7 +13,7 @@ const decode = (raw: string) => {
 
 export function jwtDecoder(logger: Logger): IMiddleware {
   return async (ctx: Context, next: () => Promise<any>) => {
-    const authorizationHeader = ctx.request.headers["Authorization"];
+    const authorizationHeader = ctx.request.headers["authorization"];
 
     const isPlayground = detectGraphQLPlayground(ctx);
     const isHealthCheck = detectHealthCheck(ctx);
@@ -28,8 +28,8 @@ export function jwtDecoder(logger: Logger): IMiddleware {
 
     if (authorizationHeader) {
       logger.debug("Decoding JWT");
-      const encodedToken = ctx.headers["Authorization"];
-      const [encHeader, encPayload] = encodedToken.split(".");
+      const encodedToken = ctx.headers["authorization"];
+      const [encHeader, encPayload] = encodedToken.split(" ")[1].split(".");
 
       const header = decode(encHeader);
       const payload = decode(encPayload);

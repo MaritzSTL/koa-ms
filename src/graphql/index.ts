@@ -1,15 +1,16 @@
-import { gql } from "apollo-server-koa";
-import * as recognitions from "./recognitions";
+import { importSchema } from "graphql-import";
+import { Mutation } from "./resolvers/Mutation";
+import { Query } from "./resolvers/Query";
+import { User } from "./resolvers/User";
+import { Todo } from "./resolvers/Todo";
 
-const baseTypeDefs = gql`
-  type Query {
-    blank: String
-  }
+const typeDefs = importSchema("src/graphql/schema.graphql");
 
-  type Mutation {
-    blank: String
-  }
-`;
+const resolvers = {
+  Mutation,
+  Query,
+  User,
+  Todo
+};
 
-export const typeDefs = [baseTypeDefs, recognitions.typeDef];
-export const resolvers = [recognitions.resolvers];
+export { typeDefs, resolvers };
