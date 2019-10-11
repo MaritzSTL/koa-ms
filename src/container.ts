@@ -7,12 +7,14 @@ import {
   configRetrievalStrategies
 } from "./lib/config";
 import { initLDClient } from "./lib/launchdarkly";
+import { Prisma, prisma } from "./prisma/generated/prisma-client";
 
 export interface ServiceContainer {
   config: AppConfig;
   health: HealthMonitor;
   logger: Logger;
   ldClient?: LDClient;
+  db: Prisma;
 }
 
 /**
@@ -41,6 +43,7 @@ export async function createContainer(
     config,
     health: healthMonitor,
     logger,
-    ldClient
+    ldClient,
+    db: prisma
   };
 }

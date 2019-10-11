@@ -1,11 +1,11 @@
 # source: http://localhost:4466
-# timestamp: Wed Oct 02 2019 14:44:35 GMT-0500 (Central Daylight Time)
+# timestamp: Fri Oct 11 2019 11:31:51 GMT-0500 (Central Daylight Time)
 
-type AggregateLineItem {
+type AggregateTodo {
   count: Int!
 }
 
-type AggregateRecognition {
+type AggregateUser {
   count: Int!
 }
 
@@ -16,545 +16,6 @@ type BatchPayload {
 
 scalar DateTime
 
-type LineItem implements Node {
-  id: ID!
-  from: String!
-  to: String!
-  createdAt: DateTime
-  updatedAt: DateTime
-  amount: Int!
-}
-
-"""A connection to a list of items."""
-type LineItemConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [LineItemEdge]!
-  aggregate: AggregateLineItem!
-}
-
-input LineItemCreateInput {
-  id: ID
-  from: String!
-  to: String!
-  amount: Int!
-}
-
-input LineItemCreateManyInput {
-  create: [LineItemCreateInput!]
-  connect: [LineItemWhereUniqueInput!]
-}
-
-"""An edge in a connection."""
-type LineItemEdge {
-  """The item at the end of the edge."""
-  node: LineItem!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum LineItemOrderByInput {
-  id_ASC
-  id_DESC
-  from_ASC
-  from_DESC
-  to_ASC
-  to_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  amount_ASC
-  amount_DESC
-}
-
-type LineItemPreviousValues {
-  id: ID!
-  from: String!
-  to: String!
-  createdAt: DateTime
-  updatedAt: DateTime
-  amount: Int!
-}
-
-input LineItemScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [LineItemScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [LineItemScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [LineItemScalarWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  from: String
-
-  """All values that are not equal to given value."""
-  from_not: String
-
-  """All values that are contained in given list."""
-  from_in: [String!]
-
-  """All values that are not contained in given list."""
-  from_not_in: [String!]
-
-  """All values less than the given value."""
-  from_lt: String
-
-  """All values less than or equal the given value."""
-  from_lte: String
-
-  """All values greater than the given value."""
-  from_gt: String
-
-  """All values greater than or equal the given value."""
-  from_gte: String
-
-  """All values containing the given string."""
-  from_contains: String
-
-  """All values not containing the given string."""
-  from_not_contains: String
-
-  """All values starting with the given string."""
-  from_starts_with: String
-
-  """All values not starting with the given string."""
-  from_not_starts_with: String
-
-  """All values ending with the given string."""
-  from_ends_with: String
-
-  """All values not ending with the given string."""
-  from_not_ends_with: String
-  to: String
-
-  """All values that are not equal to given value."""
-  to_not: String
-
-  """All values that are contained in given list."""
-  to_in: [String!]
-
-  """All values that are not contained in given list."""
-  to_not_in: [String!]
-
-  """All values less than the given value."""
-  to_lt: String
-
-  """All values less than or equal the given value."""
-  to_lte: String
-
-  """All values greater than the given value."""
-  to_gt: String
-
-  """All values greater than or equal the given value."""
-  to_gte: String
-
-  """All values containing the given string."""
-  to_contains: String
-
-  """All values not containing the given string."""
-  to_not_contains: String
-
-  """All values starting with the given string."""
-  to_starts_with: String
-
-  """All values not starting with the given string."""
-  to_not_starts_with: String
-
-  """All values ending with the given string."""
-  to_ends_with: String
-
-  """All values not ending with the given string."""
-  to_not_ends_with: String
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  amount: Int
-
-  """All values that are not equal to given value."""
-  amount_not: Int
-
-  """All values that are contained in given list."""
-  amount_in: [Int!]
-
-  """All values that are not contained in given list."""
-  amount_not_in: [Int!]
-
-  """All values less than the given value."""
-  amount_lt: Int
-
-  """All values less than or equal the given value."""
-  amount_lte: Int
-
-  """All values greater than the given value."""
-  amount_gt: Int
-
-  """All values greater than or equal the given value."""
-  amount_gte: Int
-}
-
-type LineItemSubscriptionPayload {
-  mutation: MutationType!
-  node: LineItem
-  updatedFields: [String!]
-  previousValues: LineItemPreviousValues
-}
-
-input LineItemSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [LineItemSubscriptionWhereInput!]
-
-  """The subscription event gets dispatched when it's listed in mutation_in"""
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: LineItemWhereInput
-}
-
-input LineItemUpdateDataInput {
-  from: String
-  to: String
-  amount: Int
-}
-
-input LineItemUpdateInput {
-  from: String
-  to: String
-  amount: Int
-}
-
-input LineItemUpdateManyDataInput {
-  from: String
-  to: String
-  amount: Int
-}
-
-input LineItemUpdateManyInput {
-  create: [LineItemCreateInput!]
-  connect: [LineItemWhereUniqueInput!]
-  set: [LineItemWhereUniqueInput!]
-  disconnect: [LineItemWhereUniqueInput!]
-  delete: [LineItemWhereUniqueInput!]
-  update: [LineItemUpdateWithWhereUniqueNestedInput!]
-  updateMany: [LineItemUpdateManyWithWhereNestedInput!]
-  deleteMany: [LineItemScalarWhereInput!]
-  upsert: [LineItemUpsertWithWhereUniqueNestedInput!]
-}
-
-input LineItemUpdateManyMutationInput {
-  from: String
-  to: String
-  amount: Int
-}
-
-input LineItemUpdateManyWithWhereNestedInput {
-  where: LineItemScalarWhereInput!
-  data: LineItemUpdateManyDataInput!
-}
-
-input LineItemUpdateWithWhereUniqueNestedInput {
-  where: LineItemWhereUniqueInput!
-  data: LineItemUpdateDataInput!
-}
-
-input LineItemUpsertWithWhereUniqueNestedInput {
-  where: LineItemWhereUniqueInput!
-  update: LineItemUpdateDataInput!
-  create: LineItemCreateInput!
-}
-
-input LineItemWhereInput {
-  """Logical AND on all given filters."""
-  AND: [LineItemWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  from: String
-
-  """All values that are not equal to given value."""
-  from_not: String
-
-  """All values that are contained in given list."""
-  from_in: [String!]
-
-  """All values that are not contained in given list."""
-  from_not_in: [String!]
-
-  """All values less than the given value."""
-  from_lt: String
-
-  """All values less than or equal the given value."""
-  from_lte: String
-
-  """All values greater than the given value."""
-  from_gt: String
-
-  """All values greater than or equal the given value."""
-  from_gte: String
-
-  """All values containing the given string."""
-  from_contains: String
-
-  """All values not containing the given string."""
-  from_not_contains: String
-
-  """All values starting with the given string."""
-  from_starts_with: String
-
-  """All values not starting with the given string."""
-  from_not_starts_with: String
-
-  """All values ending with the given string."""
-  from_ends_with: String
-
-  """All values not ending with the given string."""
-  from_not_ends_with: String
-  to: String
-
-  """All values that are not equal to given value."""
-  to_not: String
-
-  """All values that are contained in given list."""
-  to_in: [String!]
-
-  """All values that are not contained in given list."""
-  to_not_in: [String!]
-
-  """All values less than the given value."""
-  to_lt: String
-
-  """All values less than or equal the given value."""
-  to_lte: String
-
-  """All values greater than the given value."""
-  to_gt: String
-
-  """All values greater than or equal the given value."""
-  to_gte: String
-
-  """All values containing the given string."""
-  to_contains: String
-
-  """All values not containing the given string."""
-  to_not_contains: String
-
-  """All values starting with the given string."""
-  to_starts_with: String
-
-  """All values not starting with the given string."""
-  to_not_starts_with: String
-
-  """All values ending with the given string."""
-  to_ends_with: String
-
-  """All values not ending with the given string."""
-  to_not_ends_with: String
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  amount: Int
-
-  """All values that are not equal to given value."""
-  amount_not: Int
-
-  """All values that are contained in given list."""
-  amount_in: [Int!]
-
-  """All values that are not contained in given list."""
-  amount_not_in: [Int!]
-
-  """All values less than the given value."""
-  amount_lt: Int
-
-  """All values less than or equal the given value."""
-  amount_lte: Int
-
-  """All values greater than the given value."""
-  amount_gt: Int
-
-  """All values greater than or equal the given value."""
-  amount_gte: Int
-}
-
-input LineItemWhereUniqueInput {
-  id: ID
-}
-
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -562,18 +23,18 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
-  createRecognition(data: RecognitionCreateInput!): Recognition!
-  createLineItem(data: LineItemCreateInput!): LineItem!
-  updateRecognition(data: RecognitionUpdateInput!, where: RecognitionWhereUniqueInput!): Recognition
-  updateLineItem(data: LineItemUpdateInput!, where: LineItemWhereUniqueInput!): LineItem
-  deleteRecognition(where: RecognitionWhereUniqueInput!): Recognition
-  deleteLineItem(where: LineItemWhereUniqueInput!): LineItem
-  upsertRecognition(where: RecognitionWhereUniqueInput!, create: RecognitionCreateInput!, update: RecognitionUpdateInput!): Recognition!
-  upsertLineItem(where: LineItemWhereUniqueInput!, create: LineItemCreateInput!, update: LineItemUpdateInput!): LineItem!
-  updateManyRecognitions(data: RecognitionUpdateManyMutationInput!, where: RecognitionWhereInput): BatchPayload!
-  updateManyLineItems(data: LineItemUpdateManyMutationInput!, where: LineItemWhereInput): BatchPayload!
-  deleteManyRecognitions(where: RecognitionWhereInput): BatchPayload!
-  deleteManyLineItems(where: LineItemWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  createTodo(data: TodoCreateInput!): Todo!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateTodo(data: TodoUpdateInput!, where: TodoWhereUniqueInput!): Todo
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteTodo(where: TodoWhereUniqueInput!): Todo
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertTodo(where: TodoWhereUniqueInput!, create: TodoCreateInput!, update: TodoUpdateInput!): Todo!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyTodoes(data: TodoUpdateManyMutationInput!, where: TodoWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyTodoes(where: TodoWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -604,12 +65,12 @@ type PageInfo {
 }
 
 type Query {
-  recognitions(where: RecognitionWhereInput, orderBy: RecognitionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Recognition]!
-  lineItems(where: LineItemWhereInput, orderBy: LineItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LineItem]!
-  recognition(where: RecognitionWhereUniqueInput!): Recognition
-  lineItem(where: LineItemWhereUniqueInput!): LineItem
-  recognitionsConnection(where: RecognitionWhereInput, orderBy: RecognitionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecognitionConnection!
-  lineItemsConnection(where: LineItemWhereInput, orderBy: LineItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LineItemConnection!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  todoes(where: TodoWhereInput, orderBy: TodoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Todo]!
+  user(where: UserWhereUniqueInput!): User
+  todo(where: TodoWhereUniqueInput!): Todo
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  todoesConnection(where: TodoWhereInput, orderBy: TodoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TodoConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -618,100 +79,93 @@ type Query {
   ): Node
 }
 
-type Recognition implements Node {
+type Subscription {
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  todo(where: TodoSubscriptionWhereInput): TodoSubscriptionPayload
+}
+
+type Todo implements Node {
   id: ID!
+  tenantId: String!
+  status: TodoStatus!
+  note: String!
   createdAt: DateTime
   updatedAt: DateTime
-  note: String!
-  lineItems(where: LineItemWhereInput, orderBy: LineItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LineItem!]
+  author: User!
 }
 
 """A connection to a list of items."""
-type RecognitionConnection {
+type TodoConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [RecognitionEdge]!
-  aggregate: AggregateRecognition!
+  edges: [TodoEdge]!
+  aggregate: AggregateTodo!
 }
 
-input RecognitionCreateInput {
+input TodoCreateInput {
   id: ID
+  tenantId: String!
+  status: TodoStatus!
   note: String!
-  lineItems: LineItemCreateManyInput
+  author: UserCreateOneWithoutTodosInput!
+}
+
+input TodoCreateManyWithoutAuthorInput {
+  create: [TodoCreateWithoutAuthorInput!]
+  connect: [TodoWhereUniqueInput!]
+}
+
+input TodoCreateWithoutAuthorInput {
+  id: ID
+  tenantId: String!
+  status: TodoStatus!
+  note: String!
 }
 
 """An edge in a connection."""
-type RecognitionEdge {
+type TodoEdge {
   """The item at the end of the edge."""
-  node: Recognition!
+  node: Todo!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum RecognitionOrderByInput {
+enum TodoOrderByInput {
   id_ASC
   id_DESC
+  tenantId_ASC
+  tenantId_DESC
+  status_ASC
+  status_DESC
+  note_ASC
+  note_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
-  note_ASC
-  note_DESC
 }
 
-type RecognitionPreviousValues {
+type TodoPreviousValues {
   id: ID!
+  tenantId: String!
+  status: TodoStatus!
+  note: String!
   createdAt: DateTime
   updatedAt: DateTime
-  note: String!
 }
 
-type RecognitionSubscriptionPayload {
-  mutation: MutationType!
-  node: Recognition
-  updatedFields: [String!]
-  previousValues: RecognitionPreviousValues
-}
-
-input RecognitionSubscriptionWhereInput {
+input TodoScalarWhereInput {
   """Logical AND on all given filters."""
-  AND: [RecognitionSubscriptionWhereInput!]
+  AND: [TodoScalarWhereInput!]
 
-  """The subscription event gets dispatched when it's listed in mutation_in"""
-  mutation_in: [MutationType!]
+  """Logical OR on all given filters."""
+  OR: [TodoScalarWhereInput!]
 
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: RecognitionWhereInput
-}
-
-input RecognitionUpdateInput {
-  note: String
-  lineItems: LineItemUpdateManyInput
-}
-
-input RecognitionUpdateManyMutationInput {
-  note: String
-}
-
-input RecognitionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [RecognitionWhereInput!]
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TodoScalarWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -752,50 +206,56 @@ input RecognitionWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  createdAt: DateTime
+  tenantId: String
 
   """All values that are not equal to given value."""
-  createdAt_not: DateTime
+  tenantId_not: String
 
   """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
+  tenantId_in: [String!]
 
   """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
+  tenantId_not_in: [String!]
 
   """All values less than the given value."""
-  createdAt_lt: DateTime
+  tenantId_lt: String
 
   """All values less than or equal the given value."""
-  createdAt_lte: DateTime
+  tenantId_lte: String
 
   """All values greater than the given value."""
-  createdAt_gt: DateTime
+  tenantId_gt: String
 
   """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
+  tenantId_gte: String
+
+  """All values containing the given string."""
+  tenantId_contains: String
+
+  """All values not containing the given string."""
+  tenantId_not_contains: String
+
+  """All values starting with the given string."""
+  tenantId_starts_with: String
+
+  """All values not starting with the given string."""
+  tenantId_not_starts_with: String
+
+  """All values ending with the given string."""
+  tenantId_ends_with: String
+
+  """All values not ending with the given string."""
+  tenantId_not_ends_with: String
+  status: TodoStatus
 
   """All values that are not equal to given value."""
-  updatedAt_not: DateTime
+  status_not: TodoStatus
 
   """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
+  status_in: [TodoStatus!]
 
   """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
+  status_not_in: [TodoStatus!]
   note: String
 
   """All values that are not equal to given value."""
@@ -836,14 +296,622 @@ input RecognitionWhereInput {
 
   """All values not ending with the given string."""
   note_not_ends_with: String
-  lineItems_some: LineItemWhereInput
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
 }
 
-input RecognitionWhereUniqueInput {
+enum TodoStatus {
+  Open
+  Resolved
+}
+
+type TodoSubscriptionPayload {
+  mutation: MutationType!
+  node: Todo
+  updatedFields: [String!]
+  previousValues: TodoPreviousValues
+}
+
+input TodoSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TodoSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: TodoWhereInput
+}
+
+input TodoUpdateInput {
+  tenantId: String
+  status: TodoStatus
+  note: String
+  author: UserUpdateOneRequiredWithoutTodosInput
+}
+
+input TodoUpdateManyDataInput {
+  tenantId: String
+  status: TodoStatus
+  note: String
+}
+
+input TodoUpdateManyMutationInput {
+  tenantId: String
+  status: TodoStatus
+  note: String
+}
+
+input TodoUpdateManyWithoutAuthorInput {
+  create: [TodoCreateWithoutAuthorInput!]
+  connect: [TodoWhereUniqueInput!]
+  set: [TodoWhereUniqueInput!]
+  disconnect: [TodoWhereUniqueInput!]
+  delete: [TodoWhereUniqueInput!]
+  update: [TodoUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [TodoUpdateManyWithWhereNestedInput!]
+  deleteMany: [TodoScalarWhereInput!]
+  upsert: [TodoUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input TodoUpdateManyWithWhereNestedInput {
+  where: TodoScalarWhereInput!
+  data: TodoUpdateManyDataInput!
+}
+
+input TodoUpdateWithoutAuthorDataInput {
+  tenantId: String
+  status: TodoStatus
+  note: String
+}
+
+input TodoUpdateWithWhereUniqueWithoutAuthorInput {
+  where: TodoWhereUniqueInput!
+  data: TodoUpdateWithoutAuthorDataInput!
+}
+
+input TodoUpsertWithWhereUniqueWithoutAuthorInput {
+  where: TodoWhereUniqueInput!
+  update: TodoUpdateWithoutAuthorDataInput!
+  create: TodoCreateWithoutAuthorInput!
+}
+
+input TodoWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TodoWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  tenantId: String
+
+  """All values that are not equal to given value."""
+  tenantId_not: String
+
+  """All values that are contained in given list."""
+  tenantId_in: [String!]
+
+  """All values that are not contained in given list."""
+  tenantId_not_in: [String!]
+
+  """All values less than the given value."""
+  tenantId_lt: String
+
+  """All values less than or equal the given value."""
+  tenantId_lte: String
+
+  """All values greater than the given value."""
+  tenantId_gt: String
+
+  """All values greater than or equal the given value."""
+  tenantId_gte: String
+
+  """All values containing the given string."""
+  tenantId_contains: String
+
+  """All values not containing the given string."""
+  tenantId_not_contains: String
+
+  """All values starting with the given string."""
+  tenantId_starts_with: String
+
+  """All values not starting with the given string."""
+  tenantId_not_starts_with: String
+
+  """All values ending with the given string."""
+  tenantId_ends_with: String
+
+  """All values not ending with the given string."""
+  tenantId_not_ends_with: String
+  status: TodoStatus
+
+  """All values that are not equal to given value."""
+  status_not: TodoStatus
+
+  """All values that are contained in given list."""
+  status_in: [TodoStatus!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [TodoStatus!]
+  note: String
+
+  """All values that are not equal to given value."""
+  note_not: String
+
+  """All values that are contained in given list."""
+  note_in: [String!]
+
+  """All values that are not contained in given list."""
+  note_not_in: [String!]
+
+  """All values less than the given value."""
+  note_lt: String
+
+  """All values less than or equal the given value."""
+  note_lte: String
+
+  """All values greater than the given value."""
+  note_gt: String
+
+  """All values greater than or equal the given value."""
+  note_gte: String
+
+  """All values containing the given string."""
+  note_contains: String
+
+  """All values not containing the given string."""
+  note_not_contains: String
+
+  """All values starting with the given string."""
+  note_starts_with: String
+
+  """All values not starting with the given string."""
+  note_not_starts_with: String
+
+  """All values ending with the given string."""
+  note_ends_with: String
+
+  """All values not ending with the given string."""
+  note_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  author: UserWhereInput
+}
+
+input TodoWhereUniqueInput {
   id: ID
 }
 
-type Subscription {
-  recognition(where: RecognitionSubscriptionWhereInput): RecognitionSubscriptionPayload
-  lineItem(where: LineItemSubscriptionWhereInput): LineItemSubscriptionPayload
+type User implements Node {
+  id: ID!
+  tenantId: String!
+  name: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+  todos(where: TodoWhereInput, orderBy: TodoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Todo!]
+}
+
+"""A connection to a list of items."""
+type UserConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  id: ID
+  tenantId: String!
+  name: String!
+  todos: TodoCreateManyWithoutAuthorInput
+}
+
+input UserCreateOneWithoutTodosInput {
+  create: UserCreateWithoutTodosInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutTodosInput {
+  id: ID
+  tenantId: String!
+  name: String!
+}
+
+"""An edge in a connection."""
+type UserEdge {
+  """The item at the end of the edge."""
+  node: User!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  tenantId_ASC
+  tenantId_DESC
+  name_ASC
+  name_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  tenantId: String!
+  name: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+}
+
+input UserUpdateInput {
+  tenantId: String
+  name: String
+  todos: TodoUpdateManyWithoutAuthorInput
+}
+
+input UserUpdateManyMutationInput {
+  tenantId: String
+  name: String
+}
+
+input UserUpdateOneRequiredWithoutTodosInput {
+  create: UserCreateWithoutTodosInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutTodosDataInput
+  upsert: UserUpsertWithoutTodosInput
+}
+
+input UserUpdateWithoutTodosDataInput {
+  tenantId: String
+  name: String
+}
+
+input UserUpsertWithoutTodosInput {
+  update: UserUpdateWithoutTodosDataInput!
+  create: UserCreateWithoutTodosInput!
+}
+
+input UserWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  tenantId: String
+
+  """All values that are not equal to given value."""
+  tenantId_not: String
+
+  """All values that are contained in given list."""
+  tenantId_in: [String!]
+
+  """All values that are not contained in given list."""
+  tenantId_not_in: [String!]
+
+  """All values less than the given value."""
+  tenantId_lt: String
+
+  """All values less than or equal the given value."""
+  tenantId_lte: String
+
+  """All values greater than the given value."""
+  tenantId_gt: String
+
+  """All values greater than or equal the given value."""
+  tenantId_gte: String
+
+  """All values containing the given string."""
+  tenantId_contains: String
+
+  """All values not containing the given string."""
+  tenantId_not_contains: String
+
+  """All values starting with the given string."""
+  tenantId_starts_with: String
+
+  """All values not starting with the given string."""
+  tenantId_not_starts_with: String
+
+  """All values ending with the given string."""
+  tenantId_ends_with: String
+
+  """All values not ending with the given string."""
+  tenantId_not_ends_with: String
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  todos_some: TodoWhereInput
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  name: String
 }

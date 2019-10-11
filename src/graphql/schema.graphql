@@ -1,0 +1,23 @@
+# import User from "../prisma/generated/prisma.graphql"
+# import Todo, TodoCreateInput, TodoUpdateInput from "../prisma/generated/prisma.graphql"
+
+type Mutation {
+  createTodo(data: TodoCreateInput): Todo!
+}
+
+type Query {
+  users: [User]!
+  todos: [Todo]!
+}
+
+input TodosCreateInput {
+  tenantId: String!
+  userId: ID!
+  todos: [TodoCreateInput]!
+}
+
+input TodosUpdateInput {
+  tenantId: String!
+  userId: ID!
+  todos: [TodoUpdateInput]!
+}
