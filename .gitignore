@@ -4,3 +4,4 @@ dist
 _site
 docs/typedoc
 yarn-error.log
+coverage

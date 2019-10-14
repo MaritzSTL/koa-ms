@@ -1,0 +1,37 @@
+html {
+  font-size: 10px;
+}
+
+body {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 80px repeat(4, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  font-size: 1.8em;
+}
+
+header {
+  grid-area: 1 / 1 / 2 / 6;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+header > * {
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+header > span {
+  font-size: 24px;
+}
+
+.toc {
+  grid-area: 2 / 1 / 6 / 2;
+  max-width: 200px;
+  padding-left: 10px;
+}
+
+.content {
+  grid-area: 2 / 2 / 6 / 5;
+}
