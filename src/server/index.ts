@@ -6,6 +6,9 @@ import { ServiceContainer } from "../container";
 import * as health from "./health";
 import * as middlewares from "./middlewares";
 import * as graphql from "./graphql";
+// import main from "../router";
+
+// main();
 
 //TODO(zemptime): I don't totally understand the following types. Let's vet/review this.
 
@@ -97,8 +100,8 @@ export function createServer(container: ServiceContainer): AppServer {
   app.use(middlewares.responseTime);
   app.use(middlewares.errorHandler(container.logger));
   app.use(middlewares.logRequest(container.logger));
-  app.use(middlewares.tenantHandler);
-  app.use(middlewares.jwtDecoder(container.logger));
+  // app.use(middlewares.tenantHandler);
+  // app.use(middlewares.jwtDecoder(container.logger));
 
   /**
    * Routes

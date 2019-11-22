@@ -30,6 +30,8 @@ export function init(app: Koa) {
   app.use(gqlServer.getMiddleware());
 }
 
+export { typeDefs };
+
 const exampleQuery = `
   query{
     users {

@@ -2,7 +2,8 @@ import { Query } from "./types";
 
 const Query: Query = {
   async users(_parent, _args, ctx) {
-    return await ctx.db.users({ where: { tenantId: ctx.tenantId } });
+    const users = await ctx.db.users({ where: { tenantId: ctx.tenantId } });
+    return users;
   },
   async todos(_parent, args, ctx) {
     // Prisma has some pluralization issues but didn't want to issue breaking changes to fix them.
